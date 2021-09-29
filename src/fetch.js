@@ -16,6 +16,7 @@ function getCityTemp(cityData, unit) {
     : Math.round(celsiusTemp * 1.8 + 32);
 }
 
+// eslint-disable-next-line no-unused-vars
 function getHumidity(cityData) {
   const { humidity } = cityData.main;
   return humidity;
