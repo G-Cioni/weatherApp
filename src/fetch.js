@@ -1,3 +1,5 @@
+import { convToFahrenheit } from './miscellaneous';
+
 const apiKey = 'a4c958d3ad3419e33e51b58a31da8bc4';
 
 async function fetchCityData(city) {
@@ -9,11 +11,9 @@ async function fetchCityData(city) {
   return data;
 }
 
-function getCityTemp(cityData, unit) {
-  const celsiusTemp = cityData.main.temp - 273.15;
-  return unit === 'c'
-    ? Math.round(celsiusTemp)
-    : Math.round(celsiusTemp * 1.8 + 32);
+function getTemp(cityData, temp, unit) {
+  const celsiusTemp = cityData.main[temp] - 273.15;
+  return unit === 'f' ? convToFahrenheit(celsiusTemp) : Math.round(celsiusTemp);
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -22,10 +22,11 @@ function getHumidity(cityData) {
   return humidity;
 }
 
-fetchCityData('rome').then((data) => {
-  console.log(getCityTemp(data, 'f'));
-  console.log(getCityTemp(data, 'c'));
-});
+function getCountry(cityData) {
+  const { country } = cityData.sys;
+  return country;
+}
 
 // fetchOffLinedata('rome').then((data) => console.log(data));
 // eslint-disable-next-line import/prefer-default-export
+export { fetchCityData, getTemp, getHumidity, getCountry };
