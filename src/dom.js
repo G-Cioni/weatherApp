@@ -10,6 +10,7 @@ const weather = document.getElementById('weather');
 const weatherDescription = document.getElementById('weather-description');
 const windSpeed = document.getElementById('wind-speed');
 const windDirection = document.getElementById('wind-direction');
+const feelsLike = document.getElementById('feels-like');
 
 function renderCityWindSpeed(cityData) {
   windSpeed.textContent = `${cityData.wind.speed} m/s`;
@@ -45,6 +46,7 @@ async function renderCityInfo(city) {
   renderCityTemp(cityData, 'temp', 'c', temperature);
   renderCityTemp(cityData, 'temp_max', 'c', high);
   renderCityTemp(cityData, 'temp_min', 'c', low);
+  renderCityTemp(cityData, 'feels_like', 'c', feelsLike);
   renderCityHumidity(cityData);
   renderCityCountry(cityData);
   renderCityWeather(cityData);
