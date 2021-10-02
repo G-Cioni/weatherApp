@@ -1,56 +1,50 @@
 import { fetchCityData, getTemp, getHumidity, getCountry } from './fetch';
 
-const cityName = document.getElementById('city-name');
-const cityTemp = document.getElementById('city-temp');
-const cityHumidity = document.getElementById('city-humidity');
-const cityHigh = document.getElementById('city-high');
-const cityLow = document.getElementById('city-low');
-const cityCountry = document.getElementById('city-country');
-const cityWeather = document.getElementById('city-weather');
-const cityWeatherDescription = document.getElementById(
-  'city-weather-description',
-);
-const cityWindSpeed = document.getElementById('city-wind-speed');
-const cityWindDirection = document.getElementById('city-wind-direction');
+const name = document.getElementById('name');
+const temperature = document.getElementById('temp');
+const humidity = document.getElementById('humidity');
+const high = document.getElementById('high');
+const low = document.getElementById('low');
+const country = document.getElementById('country');
+const weather = document.getElementById('weather');
+const weatherDescription = document.getElementById('weather-description');
+const windSpeed = document.getElementById('wind-speed');
+const windDirection = document.getElementById('wind-direction');
 
 function renderCityWindSpeed(cityData) {
-  cityWindSpeed.textContent = `${cityData.wind.speed} m/s`;
+  windSpeed.textContent = `${cityData.wind.speed} m/s`;
 }
 
 function renderCityWindDirection(cityData) {
-  cityWindDirection.textContent = `${cityData.wind.deg}°`;
+  windDirection.textContent = `${cityData.wind.deg}°`;
 }
 function renderCityWeatherDesc(cityData) {
-  cityWeatherDescription.textContent = cityData.weather[0].description;
+  weatherDescription.textContent = cityData.weather[0].description;
 }
 function renderCityWeather(cityData) {
-  cityWeather.textContent = cityData.weather[0].main;
+  weather.textContent = cityData.weather[0].main;
 }
 
 function renderCityName(cityData) {
-  cityName.textContent = cityData.name;
+  name.textContent = cityData.name;
 }
 
 function renderCityCountry(cityData) {
-  const country = getCountry(cityData);
-  cityCountry.textContent = country;
-  return country;
+  country.textContent = getCountry(cityData);
 }
 function renderCityHumidity(cityData) {
-  const humidity = getHumidity(cityData);
-  cityHumidity.textContent = `${humidity}%`;
+  humidity.textContent = getHumidity(cityData);
 }
 function renderCityTemp(cityData, temp, unit, div) {
-  const temperature = getTemp(cityData, temp, unit);
   // eslint-disable-next-line no-param-reassign
-  div.textContent = `${`${temperature} ${unit}`}°`;
+  div.textContent = `${`${getTemp(cityData, temp, unit)} ${unit}`}°`;
 }
 async function renderCityInfo(city) {
   const cityData = await fetchCityData(city);
   renderCityName(cityData);
-  renderCityTemp(cityData, 'temp', 'c', cityTemp);
-  renderCityTemp(cityData, 'temp_max', 'c', cityHigh);
-  renderCityTemp(cityData, 'temp_min', 'c', cityLow);
+  renderCityTemp(cityData, 'temp', 'c', temperature);
+  renderCityTemp(cityData, 'temp_max', 'c', high);
+  renderCityTemp(cityData, 'temp_min', 'c', low);
   renderCityHumidity(cityData);
   renderCityCountry(cityData);
   renderCityWeather(cityData);

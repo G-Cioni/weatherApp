@@ -2,6 +2,8 @@ import { convToFahrenheit } from './miscellaneous';
 
 const apiKey = 'a4c958d3ad3419e33e51b58a31da8bc4';
 
+//! TODO Must add error handling
+
 async function fetchCityData(city) {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`,
@@ -10,6 +12,18 @@ async function fetchCityData(city) {
   const data = await response.json();
   return data;
 }
+
+async function fetchFiveDayData(city) {
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`,
+    { mode: 'cors' },
+  );
+  const data = await response.json();
+  return data;
+}
+
+const info = fetchFiveDayData('rome,italy');
+info.then((data) => console.log(data));
 
 function getTemp(cityData, temp, unit) {
   const celsiusTemp = cityData.main[temp] - 273.15;
