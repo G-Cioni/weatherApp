@@ -1,0 +1,89 @@
+:root {
+  --h4-margin: 0.5em;
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(./fonts/Roboto-Regular.ttf);
+}
+
+body {
+  font-family: roboto;
+}
+
+#container {
+  display: grid;
+  grid-template-areas: 'main secondary';
+  /* '. forecast .'; */
+}
+
+#main-info {
+  grid-area: main;
+  display: grid;
+  grid-template-areas:
+    'weather.'
+    'name country'
+    'temperature .'
+    'search search';
+}
+
+#weather {
+  grid-area: weather;
+}
+#name {
+  grid-area: name;
+}
+
+#country {
+  grid-area: country;
+}
+
+#temperature {
+  grid-area: temperature;
+}
+
+#search {
+  grid-area: search;
+}
+
+#search-bar {
+  border: 0px solid black;
+  border-bottom: 1px solid red;
+}
+
+::placeholder {
+  font-family: roboto;
+  font-style: italic;
+}
+
+#search-bar:focus {
+  outline: none;
+}
+#search-btn {
+  border: 0px;
+  position: relative;
+  right: 2em;
+}
+
+#secondary-info {
+  grid-area: secondary;
+}
+
+#forecast {
+  grid-area: forecast;
+}
+
+h1 {
+  font-size: 5em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+h3 {
+}
+h4 {
+  margin: var(--h4-margin);
+}
