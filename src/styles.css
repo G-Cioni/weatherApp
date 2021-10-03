@@ -38,8 +38,42 @@ body {
   grid-area: country;
 }
 
-#temperature {
+#temp-with-scale {
   grid-area: temperature;
+}
+
+#main-temperature {
+  display: inline-block;
+}
+#active-scale {
+  display: inline-block;
+  position: relative;
+  bottom: 3em;
+}
+
+.scale-btn {
+  border: 0px;
+}
+
+#celsius {
+  padding-right: 0em;
+}
+#celsius::after {
+  content: ' |';
+  position: relative;
+  bottom: 0.12em;
+}
+
+#fahrenheit {
+  padding-left: 0em;
+  margin-left: -0.15em;
+}
+
+.temperature::after {
+  content: '°C';
+  font-size: 0.4em;
+  position: relative;
+  bottom: 1.2em;
 }
 
 #search {
