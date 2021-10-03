@@ -1,16 +1,21 @@
 import { fetchCityData, getTemp, getHumidity, getCountry } from './fetch';
 
 const name = document.getElementById('name');
-const temperature = document.getElementById('temp');
+const temperature = document.getElementById('temperature');
 const humidity = document.getElementById('humidity');
 const high = document.getElementById('high');
 const low = document.getElementById('low');
 const country = document.getElementById('country');
-const weather = document.getElementById('weather');
-const weatherDescription = document.getElementById('weather-description');
+const weather = document.getElementById('weather-description');
 const windSpeed = document.getElementById('wind-speed');
 const windDirection = document.getElementById('wind-direction');
 const feelsLike = document.getElementById('feels-like');
+
+function capitalize(string) {
+  const wordArray = string.split('');
+  wordArray[0] = wordArray[0].toUpperCase();
+  return wordArray.join('');
+}
 
 function renderCityWindSpeed(cityData) {
   windSpeed.textContent = `${cityData.wind.speed} m/s`;
@@ -19,11 +24,10 @@ function renderCityWindSpeed(cityData) {
 function renderCityWindDirection(cityData) {
   windDirection.textContent = `${cityData.wind.deg}°`;
 }
+
 function renderCityWeatherDesc(cityData) {
-  weatherDescription.textContent = cityData.weather[0].description;
-}
-function renderCityWeather(cityData) {
-  weather.textContent = cityData.weather[0].main;
+  const { description } = cityData.weather[0];
+  weather.textContent = capitalize(description);
 }
 
 function renderCityName(cityData) {
@@ -33,23 +37,25 @@ function renderCityName(cityData) {
 function renderCityCountry(cityData) {
   country.textContent = getCountry(cityData);
 }
+
 function renderCityHumidity(cityData) {
-  humidity.textContent = getHumidity(cityData);
+  humidity.textContent = `${getHumidity(cityData)}%`;
 }
+
 function renderCityTemp(cityData, temp, unit, div) {
   // eslint-disable-next-line no-param-reassign
-  div.textContent = `${`${getTemp(cityData, temp, unit)} ${unit}`}°`;
+  div.textContent = `${`${getTemp(cityData, temp, unit)} °${unit}`}`;
 }
+
 async function renderCityInfo(city) {
   const cityData = await fetchCityData(city);
   renderCityName(cityData);
-  renderCityTemp(cityData, 'temp', 'c', temperature);
-  renderCityTemp(cityData, 'temp_max', 'c', high);
-  renderCityTemp(cityData, 'temp_min', 'c', low);
-  renderCityTemp(cityData, 'feels_like', 'c', feelsLike);
+  renderCityTemp(cityData, 'temp', 'C', temperature);
+  renderCityTemp(cityData, 'temp_max', 'C', high);
+  renderCityTemp(cityData, 'temp_min', 'C', low);
+  renderCityTemp(cityData, 'feels_like', 'C', feelsLike);
   renderCityHumidity(cityData);
   renderCityCountry(cityData);
-  renderCityWeather(cityData);
   renderCityWeatherDesc(cityData);
   renderCityWindSpeed(cityData);
   renderCityWindDirection(cityData);

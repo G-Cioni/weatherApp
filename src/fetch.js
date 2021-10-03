@@ -22,8 +22,9 @@ async function fetchFiveDayData(city) {
   return data;
 }
 
-const info = fetchFiveDayData('rome,italy');
-info.then((data) => console.log(data));
+fetchFiveDayData('rome,italy').then((data) => console.log(data));
+
+fetchCityData('rome,Italy').then((data) => console.log(data));
 
 function getTemp(cityData, temp, unit) {
   const celsiusTemp = cityData.main[temp] - 273.15;
