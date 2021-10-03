@@ -1,7 +1,7 @@
 import { fetchCityData, getTemp, getHumidity, getCountry } from './fetch';
 
 const name = document.getElementById('name');
-const temperature = document.getElementById('temperature');
+const temperature = document.getElementById('main-temperature');
 const humidity = document.getElementById('humidity');
 const high = document.getElementById('high');
 const low = document.getElementById('low');
@@ -10,6 +10,10 @@ const weather = document.getElementById('weather-description');
 const windSpeed = document.getElementById('wind-speed');
 const windDirection = document.getElementById('wind-direction');
 const feelsLike = document.getElementById('feels-like');
+const celsiusBtn = document.getElementById('celsius');
+const fahrenheitBtn = document.getElementById('fahrenheit');
+
+function setCelsius() {}
 
 function capitalize(string) {
   const wordArray = string.split('');
@@ -44,7 +48,7 @@ function renderCityHumidity(cityData) {
 
 function renderCityTemp(cityData, temp, unit, div) {
   // eslint-disable-next-line no-param-reassign
-  div.textContent = `${`${getTemp(cityData, temp, unit)} °${unit}`}`;
+  div.textContent = `${`${getTemp(cityData, temp, unit)}`}`;
 }
 
 async function renderCityInfo(city) {
@@ -70,3 +74,6 @@ searchBtn.addEventListener('click', (e) => {
 });
 
 renderCityInfo('roma,it');
+
+celsiusBtn.addEventListener('click', (e) => {});
+fahrenheitBtn.addEventListener('click', (e) => {});
