@@ -1,4 +1,5 @@
 import { fetchCityData, getTemp, getHumidity, getCountry } from './fetch';
+import { convertToFahrenheit, convertToCelsius } from './miscellaneous';
 
 const name = document.getElementById('name');
 const temperature = document.getElementById('main-temperature');
@@ -13,8 +14,21 @@ const feelsLike = document.getElementById('feels-like');
 const celsiusBtn = document.getElementById('celsius');
 const fahrenheitBtn = document.getElementById('fahrenheit');
 
-function setCelsius() {}
+function setFahrenheit() {
+  if (celsiusBtn.classList.contains('active-unit')) {
+    celsiusBtn.classList.remove('active-unit');
+    fahrenheitBtn.classList.add('active-unit');
+    temperature.textContent = convertToFahrenheit(temperature.textContent);
+  }
+}
 
+function setCelsius() {
+  if (fahrenheitBtn.classList.contains('active-unit')) {
+    fahrenheitBtn.classList.remove('active-unit');
+    celsiusBtn.classList.add('active-unit');
+    temperature.textContent = convertToCelsius(temperature.textContent);
+  }
+}
 function capitalize(string) {
   const wordArray = string.split('');
   wordArray[0] = wordArray[0].toUpperCase();
@@ -75,5 +89,9 @@ searchBtn.addEventListener('click', (e) => {
 
 renderCityInfo('roma,it');
 
-celsiusBtn.addEventListener('click', (e) => {});
-fahrenheitBtn.addEventListener('click', (e) => {});
+celsiusBtn.addEventListener('click', () => {
+  setCelsius();
+});
+fahrenheitBtn.addEventListener('click', () => {
+  setFahrenheit();
+});
