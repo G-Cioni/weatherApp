@@ -14,11 +14,27 @@ const feelsLike = document.getElementById('feels-like');
 const celsiusBtn = document.getElementById('celsius');
 const fahrenheitBtn = document.getElementById('fahrenheit');
 
+function switchUnitPseudoElements(remove, add) {
+  low.classList.remove(remove);
+  low.classList.add(add);
+  high.classList.remove(remove);
+  high.classList.add(add);
+  feelsLike.classList.remove(remove);
+  feelsLike.classList.add(add);
+}
+
+function convertAllTemp(convertFunc) {
+  temperature.textContent = convertFunc(temperature.textContent);
+  low.textContent = convertFunc(low.textContent);
+  high.textContent = convertFunc(high.textContent);
+  feelsLike.textContent = convertFunc(feelsLike.textContent);
+}
 function setFahrenheit() {
   if (celsiusBtn.classList.contains('active-unit')) {
     celsiusBtn.classList.remove('active-unit');
     fahrenheitBtn.classList.add('active-unit');
-    temperature.textContent = convertToFahrenheit(temperature.textContent);
+    switchUnitPseudoElements('temperature-celsius', 'temperature-fahrenheit');
+    convertAllTemp(convertToFahrenheit);
   }
 }
 
@@ -26,7 +42,8 @@ function setCelsius() {
   if (fahrenheitBtn.classList.contains('active-unit')) {
     fahrenheitBtn.classList.remove('active-unit');
     celsiusBtn.classList.add('active-unit');
-    temperature.textContent = convertToCelsius(temperature.textContent);
+    switchUnitPseudoElements('temperature-fahrenheit', 'temperature-celsius');
+    convertAllTemp(convertToCelsius);
   }
 }
 function capitalize(string) {

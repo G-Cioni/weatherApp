@@ -60,6 +60,7 @@ body {
 }
 #celsius::after {
   content: ' |';
+  font-weight: bold;
   position: relative;
   bottom: 0.12em;
 }
@@ -69,8 +70,18 @@ body {
   margin-left: -0.15em;
 }
 
-.temperature::after {
+.active-unit {
+  font-weight: bold;
+}
+.temperature-celsius::after {
   content: '°C';
+  font-size: 0.4em;
+  position: relative;
+  bottom: 1.2em;
+}
+
+.temperature-fahrenheit::after {
+  content: '°F';
   font-size: 0.4em;
   position: relative;
   bottom: 1.2em;
