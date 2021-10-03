@@ -1,4 +1,4 @@
-import { convToFahrenheit } from './miscellaneous';
+import { convertToFahrenheit } from './miscellaneous';
 
 const apiKey = 'a4c958d3ad3419e33e51b58a31da8bc4';
 
@@ -28,7 +28,9 @@ fetchCityData('rome,Italy').then((data) => console.log(data));
 
 function getTemp(cityData, temp, unit) {
   const celsiusTemp = cityData.main[temp] - 273.15;
-  return unit === 'f' ? convToFahrenheit(celsiusTemp) : Math.round(celsiusTemp);
+  return unit === 'F'
+    ? convertToFahrenheit(celsiusTemp)
+    : Math.round(celsiusTemp);
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -42,6 +44,5 @@ function getCountry(cityData) {
   return country;
 }
 
-// fetchOffLinedata('rome').then((data) => console.log(data));
 // eslint-disable-next-line import/prefer-default-export
 export { fetchCityData, getTemp, getHumidity, getCountry };
