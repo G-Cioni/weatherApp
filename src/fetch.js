@@ -1,4 +1,4 @@
-import { convertToFahrenheit } from './miscellaneous';
+import { convertToFahrenheit } from './converters';
 
 const apiKey = 'a4c958d3ad3419e33e51b58a31da8bc4';
 
