@@ -3,9 +3,8 @@ import {
   convertToFahrenheit,
   convertToCelsius,
   convertToMph,
-  convertoToKph,
-  msToKph,
   convertToKph,
+  msToKph,
 } from './converters';
 
 const name = document.getElementById('city');

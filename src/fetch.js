@@ -13,18 +13,14 @@ async function fetchCityData(city) {
   return data;
 }
 
-async function fetchFiveDayData(city) {
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`,
-    { mode: 'cors' },
-  );
-  const data = await response.json();
-  return data;
-}
-
-fetchFiveDayData('rome,italy').then((data) => console.log(data));
-
-fetchCityData('rome,Italy').then((data) => console.log(data));
+// async function fetchFiveDayData(city) {
+//   const response = await fetch(
+//     `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`,
+//     { mode: 'cors' },
+//   );
+//   const data = await response.json();
+//   return data;
+// }
 
 function getTemp(cityData, temp, unit) {
   const celsiusTemp = cityData.main[temp] - 273.15;
