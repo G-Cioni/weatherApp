@@ -1,5 +1,7 @@
 :root {
-  --h4-margin: 0.5em;
+  --h4-margin: 10px;
+  --dark: rgb(31, 31, 31);
+  --light: rgb(236, 236, 236);
 }
 
 @font-face {
@@ -9,11 +11,21 @@
 
 body {
   font-family: roboto;
+  background-color: var(--dark);
+  color: var(--light);
+  height: 98vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
 }
 
 #container {
+  grid-area: container;
   display: grid;
-  grid-template-areas: 'main secondary';
+  grid-template-areas:
+    'main . search'
+    'main . secondary';
+  justify-content: space-between;
   /* '. forecast .'; */
 }
 
@@ -22,37 +34,50 @@ body {
   display: grid;
   grid-template-areas:
     'weather.'
-    'name country'
+    'fullName fullName'
     'temperature .'
     'search search';
 }
 
 #weather {
   grid-area: weather;
-}
-#name {
-  grid-area: name;
+  position: relative;
+  left: 0.2em;
+  bottom: 0.1em;
 }
 
+#full-name {
+  grid-area: fullName;
+  margin-bottom: 0.5em;
+}
+#city {
+  display: inline-block;
+}
 #country {
-  grid-area: country;
+  display: inline-block;
+  position: relative;
+  bottom: 1.3em;
 }
 
-#temp-with-scale {
+#temp-plus-switch {
   grid-area: temperature;
 }
 
 #main-temperature {
   display: inline-block;
 }
-#active-scale {
+#unit-switch {
   display: inline-block;
   position: relative;
-  bottom: 3em;
+  bottom: 7em;
 }
 
 .scale-btn {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--light);
   border: 0px;
+  border-radius: 50%;
+  font-size: 1.5em;
 }
 
 #celsius {
@@ -73,62 +98,91 @@ body {
 .active-unit {
   font-weight: bold;
 }
-.temperature-celsius::after {
+.temp-metric::after {
   content: '°C';
-  font-size: 0.4em;
+  font-size: 0.6em;
   position: relative;
-  bottom: 1.2em;
+  bottom: 0.5em;
 }
 
-.temperature-fahrenheit::after {
+.temp-imperial::after {
   content: '°F';
-  font-size: 0.4em;
+  font-size: 0.6em;
   position: relative;
-  bottom: 1.2em;
+  bottom: 0.5em;
+}
+
+.speed-metric::after {
+  content: 'km/h';
+  font-size: 0.6em;
+}
+
+.speed-imperial::after {
+  content: 'mph';
+  font-size: 0.6em;
 }
 
 #search {
   grid-area: search;
+  height: 2em;
 }
 
 #search-bar {
   border: 0px solid black;
-  border-bottom: 1px solid red;
+  border-radius: 0.5em;
+  color: var(--light);
+  background-color: rgba(255, 255, 255, 0.068);
+  height: 2em;
+  width: 15em;
+  padding-left: 0.6em;
 }
 
 ::placeholder {
+  color: rgba(255, 255, 255, 0.521);
   font-family: roboto;
-  font-style: italic;
 }
 
 #search-bar:focus {
   outline: none;
 }
 #search-btn {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--light);
   border: 0px;
   position: relative;
-  right: 2em;
+  right: 2.2em;
 }
 
 #secondary-info {
   grid-area: secondary;
+  box-shadow: -1px -0px 0px 0px var(--light);
+  height: 80%;
+  position: relative;
+  top: 1.5em;
+  left: 2em;
 }
 
+.secondary-info-value {
+  margin-top: 0.1em;
+}
+.secondary-info-text {
+  margin: 0.5em;
+}
 #forecast {
   grid-area: forecast;
 }
 
 h1 {
-  font-size: 5em;
+  font-size: 10em;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 2.5em;
+  font-size: 4em;
   font-weight: bold;
 }
 h3 {
 }
 h4 {
-  margin: var(--h4-margin);
+  font-size: 1.5em;
 }
