@@ -118,11 +118,12 @@ searchBtn.addEventListener('click', (e) => {
   renderCityInfo(input.value);
 });
 
-renderCityInfo('roma,it');
-
 celsiusBtn.addEventListener('click', () => {
   setMetric();
 });
 fahrenheitBtn.addEventListener('click', () => {
   setImperial();
 });
+
+// eslint-disable-next-line import/prefer-default-export
+export { renderCityInfo };
