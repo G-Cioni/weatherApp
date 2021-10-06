@@ -6,7 +6,9 @@ import {
   convertToKph,
   msToKph,
 } from './converters';
+import { getCityTime } from './time';
 
+const time = document.getElementById('time');
 const name = document.getElementById('city');
 const temperature = document.getElementById('main-temperature');
 const humidity = document.getElementById('humidity');
@@ -96,6 +98,11 @@ function renderCityTemp(cityData, temp, unit, div) {
   div.textContent = `${`${getTemp(cityData, temp, unit)}`}`;
 }
 
+function renderCityTime(offSetSeconds) {
+  const dateString = getCityTime(offSetSeconds).toString().slice(0, 21);
+  time.textContent = dateString;
+}
+
 async function renderCityInfo(city) {
   const cityData = await fetchCityData(city);
   renderCityName(cityData);
@@ -107,6 +114,7 @@ async function renderCityInfo(city) {
   renderCityCountry(cityData);
   renderCityWeatherDesc(cityData);
   renderCityWindSpeed(cityData);
+  renderCityTime(cityData.timezone);
   // renderCityWindDirection(cityData);
   return cityData;
 }
