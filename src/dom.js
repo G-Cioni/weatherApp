@@ -6,8 +6,10 @@ import {
   convertToKph,
   msToKph,
 } from './converters';
-import { getCityTime } from './time';
+import { getCityTime, getSunrise, getSunset } from './time';
 
+const sunrise = document.getElementById('sunrise');
+const sunset = document.getElementById('sunset');
 const time = document.getElementById('time');
 const name = document.getElementById('city');
 const temperature = document.getElementById('main-temperature');
@@ -103,6 +105,14 @@ function renderCityTime(offSetSeconds) {
   time.textContent = dateString;
 }
 
+function renderSunrise(cityData) {
+  const sunriseTime = getSunrise(cityData).toString().slice(16, 21);
+  sunrise.textContent = sunriseTime;
+}
+function renderSunset(cityData) {
+  const sunsetTime = getSunset(cityData).toString().slice(16, 21);
+  sunset.textContent = sunsetTime;
+}
 async function renderCityInfo(city) {
   const cityData = await fetchCityData(city);
   renderCityName(cityData);
@@ -115,6 +125,8 @@ async function renderCityInfo(city) {
   renderCityWeatherDesc(cityData);
   renderCityWindSpeed(cityData);
   renderCityTime(cityData.timezone);
+  renderSunrise(cityData);
+  renderSunset(cityData);
   // renderCityWindDirection(cityData);
   return cityData;
 }
