@@ -22,8 +22,8 @@ function getCityTime(offsetSeconds) {
 function getSunTime(cityData, sunActivity) {
   const offsetMinutes = cityData.timezone / 60;
   const sunsetDate = new Date(sunActivity * 1000);
-  //! subtracting 120 (minutes) might only be a temporary fix
-  return processOffset(sunsetDate, offsetMinutes - 120);
+  const offsetBalance = sunsetDate.getTimezoneOffset();
+  return processOffset(sunsetDate, offsetMinutes + offsetBalance);
 }
 
 function getSunrise(cityData) {
