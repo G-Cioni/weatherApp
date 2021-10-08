@@ -6,24 +6,24 @@ const apiKey = 'a4c958d3ad3419e33e51b58a31da8bc4';
 
 async function fetchCityData(city) {
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`,
     { mode: 'cors' },
   );
   const data = await response.json();
   return data;
 }
 
-// async function fetchFiveDayData(city) {
-//   const response = await fetch(
-//     `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`,
-//     { mode: 'cors' },
-//   );
-//   const data = await response.json();
-//   return data;
-// }
+async function fetchForecastData(city) {
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&units=metric&appid=${apiKey}`,
+    { mode: 'cors' },
+  );
+  const data = await response.json();
+  return data;
+}
 
 function getTemp(cityData, temp, unit) {
-  const celsiusTemp = cityData.main[temp] - 273.15;
+  const celsiusTemp = cityData.main[temp];
   return unit === 'F'
     ? convertToFahrenheit(celsiusTemp)
     : Math.round(celsiusTemp);
@@ -41,4 +41,4 @@ function getCountry(cityData) {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { fetchCityData, getTemp, getHumidity, getCountry };
+export { fetchCityData, fetchForecastData, getTemp, getHumidity, getCountry };
