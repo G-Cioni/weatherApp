@@ -13,7 +13,7 @@ import {
   msToKph,
   addHours,
 } from './converters';
-import { getUtc, getCityTime, getSunrise, getSunset } from './time';
+import { getCityTime, getSunrise, getSunset } from './time';
 
 const sunriseElement = document.getElementById('sunrise');
 const sunsetElement = document.getElementById('sunset');
@@ -55,7 +55,12 @@ function convertAll(convertTemp, convertSpeed) {
   // high.textContent = convertTemp(high.textContent);
   feelsLikeElement.textContent = convertTemp(feelsLikeElement.textContent);
   windSpeedElement.textContent = convertSpeed(windSpeedElement.textContent);
+  const forecastTemps = [...document.querySelectorAll('.forecast-temp')];
+  for (let i = 0; i < forecastTemps.length; i += 1) {
+    forecastTemps[i].textContent = convertTemp(forecastTemps[i].textContent);
+  }
 }
+
 function setImperial() {
   if (celsiusBtnElement.classList.contains('active-unit')) {
     celsiusBtnElement.classList.remove('active-unit');
@@ -144,7 +149,7 @@ function pullForecastData(forecastDataItem) {
   const utcTime = forecastDataItem.dt_txt.slice(11, 16);
   const highTemp = forecastDataItem.main.temp_max;
   const lowTemp = forecastDataItem.main.temp_min;
-  const avgTemp = Math.round(((highTemp + lowTemp) / 2) * 10) / 10;
+  const avgTemp = Math.round((highTemp + lowTemp) / 2);
   const weather = forecastDataItem.weather[0].main;
   return { utcTime, avgTemp, weather };
 }
@@ -156,22 +161,34 @@ function pullAllForecastData(forecastDataList) {
   }, []);
 }
 
+function removeAllChildren(parentNode) {
+  while (parentNode.firstChild) {
+    parentNode.removeChild(parentNode.lastChild);
+  }
+}
+
 function createForecastCard(forecastDataItem, forecastTime) {
   const forecastContainer = document.getElementById('forecast');
   const forecastCard = document.createElement('div');
   const time = document.createElement('div');
-  time.textContent = forecastTime;
-  const weather = document.createElement('div');
-  weather.textContent = forecastDataItem.weather;
+  const weatherCondition = document.createElement('div');
   const avgTemp = document.createElement('div');
+  time.textContent = forecastTime;
+  weatherCondition.textContent = forecastDataItem.weather;
   avgTemp.textContent = forecastDataItem.avgTemp;
+  forecastCard.appendChild(time);
+  forecastCard.appendChild(weatherCondition);
+  avgTemp.classList.add('temp-metric', 'forecast-temp');
+  forecastCard.appendChild(avgTemp);
   forecastCard.classList.add('forecast-card');
   forecastContainer.appendChild(forecastCard);
 }
 
-function createAllForecastCards(forecastDataArray, forecastTime) {
+function createAllForecastCards(forecastDataArray, offSetHours) {
+  removeAllChildren(document.getElementById('forecast'));
   forecastDataArray.forEach((forecastDataItem) => {
-    createForecastCard(forecastDataItem);
+    const forecastTime = addHours(forecastDataItem.utcTime, offSetHours);
+    createForecastCard(forecastDataItem, forecastTime);
   });
 }
 
@@ -179,13 +196,17 @@ async function renderForecastData(city) {
   const forecastData = await fetchForecastData(city);
   const forecastDataArray = pullAllForecastData(forecastData.list);
   const offSetHours = forecastData.city.timezone / (60 * 60);
-  const forecastTime = addHours(forecastDataArray[0].utcTime, offSetHours);
+  createAllForecastCards(forecastDataArray, offSetHours);
   console.log(forecastData);
 
   return forecastData;
 }
+// todo searching for a new city while in Imperial doesnt't work
 
-renderForecastData('new York');
+function renderAll(city) {
+  renderCityData(city);
+  renderForecastData(city);
+}
 
 //! FORECAST CODE FINISHES HERE
 
@@ -193,7 +214,7 @@ const input = document.getElementById('search-bar');
 const searchBtn = document.getElementById('search-btn');
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  renderCityData(input.value);
+  renderAll(input.value);
 });
 
 celsiusBtnElement.addEventListener('click', () => {
@@ -204,4 +225,4 @@ fahrenheitBtnElement.addEventListener('click', () => {
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export { renderCityData };
+export { renderAll };
