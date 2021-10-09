@@ -37,4 +37,4 @@ function getSunset(cityData) {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { getCityTime, getSunrise, getSunset };
+export { getUtc, getCityTime, getSunrise, getSunset };
