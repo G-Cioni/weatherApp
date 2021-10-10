@@ -40,6 +40,12 @@ function switchTempPseudoElements(remove, add) {
   // low.classList.add(add);
   // high.classList.remove(remove);
   // high.classList.add(add);
+  const forecastTemps = document.querySelectorAll('.forecast-temp');
+  for (var i = 0; i < forecastTemps.length; i += 1) {
+    forecastTemps[i].classList.remove(remove);
+    forecastTemps[i].classList.add(add);
+  }
+
   feelsLikeElement.classList.remove(remove);
   feelsLikeElement.classList.add(add);
 }
@@ -197,11 +203,9 @@ async function renderForecastData(city) {
   const forecastDataArray = pullAllForecastData(forecastData.list);
   const offSetHours = forecastData.city.timezone / (60 * 60);
   createAllForecastCards(forecastDataArray, offSetHours);
-  console.log(forecastData);
-
   return forecastData;
 }
-// todo searching for a new city while in Imperial doesnt't work
+// todo searching for a new city while in Imperial doesn't work
 
 function renderAll(city) {
   renderCityData(city);
