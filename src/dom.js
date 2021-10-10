@@ -37,7 +37,7 @@ const fahrenheitBtnElement = document.getElementById('fahrenheit');
 
 function switchForecastTempPseudoElements(remove, add) {
   const forecastTemps = document.querySelectorAll('.forecast-temp');
-  for (var i = 0; i < forecastTemps.length; i += 1) {
+  for (let i = 0; i < forecastTemps.length; i += 1) {
     forecastTemps[i].classList.remove(remove);
     forecastTemps[i].classList.add(add);
   }
@@ -81,7 +81,6 @@ function setImperial() {
 
 function keepImperial() {
   if (fahrenheitBtnElement.classList.contains('active-unit')) {
-    console.log('ciao');
     switchTempPseudoElements('temp-metric', 'temp-imperial');
     switchSpeedPseudoElement('speed-metric', 'speed-imperial');
     convertAll(convertToFahrenheit, convertToMph);
@@ -104,7 +103,11 @@ function capitalize(string) {
 }
 
 function renderCityWindSpeed(cityData) {
-  windSpeedElement.textContent = `${msToKph(cityData.wind.gust)}`;
+  if (cityData.wind.gust) {
+    windSpeedElement.textContent = `${msToKph(cityData.wind.gust)}`;
+  } else {
+    windSpeedElement.textContent = `${msToKph(cityData.wind.speed)}`;
+  }
 }
 
 function renderCityWeatherDesc(cityData) {
