@@ -35,17 +35,19 @@ const fahrenheitBtnElement = document.getElementById('fahrenheit');
 //   windDirection.textContent = `${cityData.wind.deg}°`;
 // }
 
-function switchTempPseudoElements(remove, add) {
-  // low.classList.remove(remove);
-  // low.classList.add(add);
-  // high.classList.remove(remove);
-  // high.classList.add(add);
+function switchForecastTempPseudoElements(remove, add) {
   const forecastTemps = document.querySelectorAll('.forecast-temp');
   for (var i = 0; i < forecastTemps.length; i += 1) {
     forecastTemps[i].classList.remove(remove);
     forecastTemps[i].classList.add(add);
   }
-
+}
+function switchTempPseudoElements(remove, add) {
+  // low.classList.remove(remove);
+  // low.classList.add(add);
+  // high.classList.remove(remove);
+  // high.classList.add(add);
+  switchForecastTempPseudoElements(remove, add);
   feelsLikeElement.classList.remove(remove);
   feelsLikeElement.classList.add(add);
 }
@@ -77,6 +79,15 @@ function setImperial() {
   }
 }
 
+function keepImperial() {
+  if (fahrenheitBtnElement.classList.contains('active-unit')) {
+    console.log('ciao');
+    switchTempPseudoElements('temp-metric', 'temp-imperial');
+    switchSpeedPseudoElement('speed-metric', 'speed-imperial');
+    convertAll(convertToFahrenheit, convertToMph);
+  }
+}
+
 function setMetric() {
   if (fahrenheitBtnElement.classList.contains('active-unit')) {
     fahrenheitBtnElement.classList.remove('active-unit');
@@ -93,7 +104,7 @@ function capitalize(string) {
 }
 
 function renderCityWindSpeed(cityData) {
-  windSpeedElement.textContent = `${msToKph(cityData.wind.speed)}`;
+  windSpeedElement.textContent = `${msToKph(cityData.wind.gust)}`;
 }
 
 function renderCityWeatherDesc(cityData) {
@@ -207,9 +218,10 @@ async function renderForecastData(city) {
 }
 // todo searching for a new city while in Imperial doesn't work
 
-function renderAll(city) {
-  renderCityData(city);
-  renderForecastData(city);
+async function renderAll(city) {
+  await renderCityData(city);
+  await renderForecastData(city);
+  keepImperial();
 }
 
 //! FORECAST CODE FINISHES HERE
