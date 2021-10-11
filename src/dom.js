@@ -27,6 +27,7 @@ const windSpeedElement = document.getElementById('wind-speed');
 const feelsLikeElement = document.getElementById('feels-like');
 const celsiusBtnElement = document.getElementById('celsius');
 const fahrenheitBtnElement = document.getElementById('fahrenheit');
+const errorMessage = document.getElementById('error-message');
 // const high = document.getElementById('high');
 // const low = document.getElementById('low');
 // const windDirection = document.getElementById('wind-direction');
@@ -212,6 +213,7 @@ function createAllForecastCards(forecastDataArray, offSetHours) {
   });
 }
 
+// eslint-disable-next-line consistent-return
 async function renderForecastData(city) {
   const forecastData = await fetchForecastData(city);
   const forecastDataArray = pullAllForecastData(forecastData.list);
@@ -219,12 +221,28 @@ async function renderForecastData(city) {
   createAllForecastCards(forecastDataArray, offSetHours);
   return forecastData;
 }
-// todo searching for a new city while in Imperial doesn't work
 
 async function renderAll(city) {
-  await renderCityData(city);
-  await renderForecastData(city);
-  keepImperial();
+  const previousCity = nameElement.textContent;
+  try {
+    errorMessage.textContent = '';
+    await renderCityData(city);
+    await renderForecastData(city);
+    keepImperial();
+  } catch (error) {
+    nameElement.textContent = previousCity;
+    if (
+      error.message === "Cannot read properties of undefined (reading 'temp')"
+    ) {
+      errorMessage.textContent = 'Please enter a valid city';
+    } else if (error.message === 'Failed to fetch') {
+      errorMessage.textContent =
+        'There is a problem with the connection, please try again';
+    } else {
+      errorMessage.textContent =
+        'There has been an unknown error, please try again';
+    }
+  }
 }
 
 //! FORECAST CODE FINISHES HERE
