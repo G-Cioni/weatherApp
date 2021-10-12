@@ -14,6 +14,7 @@ import {
   addHours,
 } from './converters';
 import { getCityTime, getSunrise, getSunset } from './time';
+import { weatherIconsRaw, createWeatherIcon } from './icons';
 
 const sunriseElement = document.getElementById('sunrise');
 const sunsetElement = document.getElementById('sunset');
@@ -146,8 +147,13 @@ function renderSunset(cityData) {
   const sunsetTime = getSunset(cityData).toString().slice(16, 21);
   sunsetElement.textContent = sunsetTime;
 }
+
+function renderCityWeatherIcons() {}
+
 async function renderCityData(city) {
   const cityData = await fetchCityData(city);
+  console.log(cityData);
+
   renderCityName(cityData);
   renderCityTemp(cityData, 'temp', 'C', temperatureElement);
   // renderCityTemp(cityData, 'temp_max', 'C', high);
@@ -199,8 +205,9 @@ function createForecastCard(forecastDataItem, forecastTime) {
   avgTemp.textContent = forecastDataItem.avgTemp;
   forecastCard.appendChild(time);
   forecastCard.appendChild(weatherCondition);
-  avgTemp.classList.add('temp-metric', 'forecast-temp');
   forecastCard.appendChild(avgTemp);
+  weatherCondition.classList.add('forecast-weather');
+  avgTemp.classList.add('temp-metric', 'forecast-temp');
   forecastCard.classList.add('forecast-card');
   forecastContainer.appendChild(forecastCard);
 }
@@ -213,12 +220,27 @@ function createAllForecastCards(forecastDataArray, offSetHours) {
   });
 }
 
+function renderForecastWeatherIcons() {
+  const forecastWeatherArray = document.querySelectorAll('.forecast-weather');
+
+  forecastWeatherArray.forEach((item) => {
+    const condition = item.innerHTML.toLowerCase();
+    console.log(condition);
+    // eslint-disable-next-line no-param-reassign
+    item.innerHTML = '';
+    return item.appendChild(createWeatherIcon(weatherIconsRaw[`${condition}`]));
+  });
+}
+
 // eslint-disable-next-line consistent-return
 async function renderForecastData(city) {
   const forecastData = await fetchForecastData(city);
   const forecastDataArray = pullAllForecastData(forecastData.list);
+  console.log(forecastData);
   const offSetHours = forecastData.city.timezone / (60 * 60);
   createAllForecastCards(forecastDataArray, offSetHours);
+  renderForecastWeatherIcons();
+
   return forecastData;
 }
 
