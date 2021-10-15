@@ -1,16 +1,16 @@
 import clear from './img/day.svg';
-import night from './img/night.svg';
+import clearNight from './img/night.svg';
 import clouds from './img/cloudy-day-1.svg';
-import cloudyNight from './img/cloudy-night-1.svg';
+import cloudsNight from './img/cloudy-night-1.svg';
 import rain from './img/rainy-7.svg';
 import snow from './img/snowy-6.svg';
 import thunder from './img/thunder.svg';
 
-const weatherIconsRaw = {
+const weatherIcons = {
   clear,
-  night,
+  clearNight,
   clouds,
-  cloudyNight,
+  cloudsNight,
   rain,
   snow,
   thunder,
@@ -22,4 +22,4 @@ function createWeatherIcon(weatherCondition) {
   return image;
 }
 
-export { weatherIconsRaw, createWeatherIcon };
+export { weatherIcons, createWeatherIcon };
