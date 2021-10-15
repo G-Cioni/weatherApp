@@ -152,8 +152,6 @@ function renderCityWeatherIcons() {}
 
 async function renderCityData(city) {
   const cityData = await fetchCityData(city);
-  console.log(cityData);
-
   renderCityName(cityData);
   renderCityTemp(cityData, 'temp', 'C', temperatureElement);
   // renderCityTemp(cityData, 'temp_max', 'C', high);
@@ -222,13 +220,23 @@ function createAllForecastCards(forecastDataArray, offSetHours) {
 
 function renderForecastWeatherIcons() {
   const forecastWeatherArray = document.querySelectorAll('.forecast-weather');
+  const sunRise = document.getElementById('sunrise').innerHTML;
+  const sunSet = document.getElementById('sunset').innerHTML;
 
   forecastWeatherArray.forEach((item) => {
     const condition = item.innerHTML.toLowerCase();
-    console.log(condition);
+    const forecastTime = item.previousSibling.innerHTML;
+    const nightTime =
+      forecastTime <= sunRise || forecastTime >= sunSet ? 'Night' : '';
     // eslint-disable-next-line no-param-reassign
     item.innerHTML = '';
-    return item.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
+    if (condition === 'clear' || condition === 'clouds') {
+      item.appendChild(
+        createWeatherIcon(weatherIcons[`${condition}${nightTime}`]),
+      );
+    } else {
+      item.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
+    }
   });
 }
 
@@ -236,7 +244,6 @@ function renderForecastWeatherIcons() {
 async function renderForecastData(city) {
   const forecastData = await fetchForecastData(city);
   const forecastDataArray = pullAllForecastData(forecastData.list);
-  console.log(forecastData);
   const offSetHours = forecastData.city.timezone / (60 * 60);
   createAllForecastCards(forecastDataArray, offSetHours);
   renderForecastWeatherIcons();
