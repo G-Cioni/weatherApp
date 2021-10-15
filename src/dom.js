@@ -14,7 +14,7 @@ import {
   addHours,
 } from './converters';
 import { getCityTime, getSunrise, getSunset } from './time';
-import { weatherIconsRaw, createWeatherIcon } from './icons';
+import { weatherIcons, createWeatherIcon } from './icons';
 
 const sunriseElement = document.getElementById('sunrise');
 const sunsetElement = document.getElementById('sunset');
@@ -228,7 +228,7 @@ function renderForecastWeatherIcons() {
     console.log(condition);
     // eslint-disable-next-line no-param-reassign
     item.innerHTML = '';
-    return item.appendChild(createWeatherIcon(weatherIconsRaw[`${condition}`]));
+    return item.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
   });
 }
 
@@ -244,6 +244,21 @@ async function renderForecastData(city) {
   return forecastData;
 }
 
+function handleErrors(error, previousCity) {
+  nameElement.textContent = previousCity;
+  if (
+    error.message === "Cannot read properties of undefined (reading 'temp')"
+  ) {
+    errorMessage.textContent = 'Please enter a valid city';
+  } else if (error.message === 'Failed to fetch') {
+    errorMessage.textContent =
+      'There is a problem with the connection, please try again';
+  } else {
+    errorMessage.textContent =
+      'There has been an unknown error, please try again';
+  }
+}
+
 async function renderAll(city) {
   const previousCity = nameElement.textContent;
   try {
@@ -252,18 +267,7 @@ async function renderAll(city) {
     await renderForecastData(city);
     keepImperial();
   } catch (error) {
-    nameElement.textContent = previousCity;
-    if (
-      error.message === "Cannot read properties of undefined (reading 'temp')"
-    ) {
-      errorMessage.textContent = 'Please enter a valid city';
-    } else if (error.message === 'Failed to fetch') {
-      errorMessage.textContent =
-        'There is a problem with the connection, please try again';
-    } else {
-      errorMessage.textContent =
-        'There has been an unknown error, please try again';
-    }
+    handleErrors(error, previousCity);
   }
 }
 
