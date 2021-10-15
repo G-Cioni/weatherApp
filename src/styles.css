@@ -72,6 +72,9 @@ body {
   position: relative;
   bottom: 7em;
 }
+#unit-switch-separator {
+  display: inline-block;
+}
 
 /* todo have to create div to separate C and F */
 
@@ -85,13 +88,7 @@ body {
 }
 
 #celsius {
-  padding-right: 0em;
-}
-#celsius::after {
-  content: ' |';
-  font-weight: bold;
-  position: relative;
-  bottom: 0.12em;
+  padding-right: 0.2em;
 }
 
 #fahrenheit {
