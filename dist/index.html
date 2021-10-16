@@ -9,56 +9,64 @@
 </head>
 <body>
     <div id="container">
+
         <form id="search" autocomplete="off">
             <input type="text" id="search-bar" placeholder="Search city...">
             <button type = "submit" id="search-btn"><i class="fas fa-search"></i></button>
             <h5 id="error-message"></h5>
         </form>
-        <div id="main-info">
+       
+        <div id="main-content">
+           <div id="main-info">
+                <h4 id="time"></h4>
+                <div id="full-name">
+                    <h2 id="city"></h2>
+                    <h4 id="country"></h4>
+                </div>   
+                <div id="main-weather-icon"></div>
+                <h4 id="weather"></h4>
+                <div id="temp-plus-switch">
+                    <h1 id="main-temperature" ></h1></h1>
+                    <div id="unit-switch">
+                        <button id="celsius" class="scale-btn active-unit">°C</button>
+                        <h4 id="unit-switch-separator">|</h4>
+                        <button id="fahrenheit" class="scale-btn">°F</button>
+                    </div>
+                </div>
+            </div>
+        
+            <div id="secondary-info">
+                <div id="feels-like-text" class="secondary-info-text">Feels Like
+                    <h4 id="feels-like" class="temp-metric secondary-info-value"></h4>
+                </div>
+                <div id="humidity-text" class="secondary-info-text">Humidity
+                    <h4 id="humidity" class="secondary-info-value"></h4>
+                </div>
+                <div id="wind-speed-text" class="secondary-info-text">Wind speed
+                    <h4 id="wind-speed" class="speed-metric secondary-info-value"></h4>
+                </div>
+                <!-- <h4 id="high" class="temp-metric"></h4> -->
+                <!-- <h4 id="low" class="temp-"></h4> -->
+                <!-- <h4 id="wind-direction"></h4> -->
+            </div>
+        </div>
             
+        <div id="bubbles">
             <div id="sunrise-text" class="secondary-info-text">
                 Sunrise:
                 <h4 id="sunrise"></h4>
             </div>
-            
             <div id="sunset-text" class="secondary-info-text">
                 Sunset: 
                 <h4 id="sunset"></h4>
             </div>
+        </div>
 
-            <h4 id="time"></h4>
-            <h4 id="weather"></h4>
-            <div id="full-name">
-                <h2 id="city"></h2>
-                <h4 id="country"></h4>
-            </div>   
-            <div id="main-weather-icon"></div>
-            <div id="temp-plus-switch">
-                <h1 id="main-temperature" ></h1></h1>
-                <div id="unit-switch">
-                    <button id="celsius" class="scale-btn active-unit">°C</button>
-                    <h4 id="unit-switch-separator">|</h4>
-                    <button id="fahrenheit" class="scale-btn">°F</button>
-                </div>
-            </div>
-        </div>
-        <div id="secondary-info">
-            <div id="feels-like-text" class="secondary-info-text">Feels Like
-                <h4 id="feels-like" class="temp-metric secondary-info-value"></h4>
-            </div>
-            <div id="humidity-text" class="secondary-info-text">Humidity
-                <h4 id="humidity" class="secondary-info-value"></h4>
-            </div>
-            <div id="wind-speed-text" class="secondary-info-text">Wind speed
-                <h4 id="wind-speed" class="speed-metric secondary-info-value"></h4>
-            </div>
-            <!-- <h4 id="high" class="temp-metric"></h4> -->
-            <!-- <h4 id="low" class="temp-"></h4> -->
-            <!-- <h4 id="wind-direction"></h4> -->
-        </div>
         <div id="forecast">
         </div>
+
     </div>
+
     <script src="bundle.js"></script>
 </body>
 </html>
