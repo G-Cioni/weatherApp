@@ -148,7 +148,24 @@ function renderSunset(cityData) {
   sunsetElement.textContent = sunsetTime;
 }
 
-function renderCityWeatherIcons() {}
+function renderCityWeatherIcon(cityData) {
+  const weatherIcon = document.getElementById('main-weather-icon');
+  const sunRise = document.getElementById('sunrise').innerHTML;
+  const sunSet = document.getElementById('sunset').innerHTML;
+  const condition = cityData.weather[0].main.toLowerCase();
+  const forecastTime = document.getElementById('time').innerHTML.slice(-5);
+  const nightTime =
+    forecastTime <= sunRise || forecastTime >= sunSet ? 'Night' : '';
+  // eslint-disable-next-line no-param-reassign
+  weatherIcon.innerHTML = '';
+  if (condition === 'clear' || condition === 'clouds') {
+    weatherIcon.appendChild(
+      createWeatherIcon(weatherIcons[`${condition}${nightTime}`]),
+    );
+  } else {
+    weatherIcon.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
+  }
+}
 
 async function renderCityData(city) {
   const cityData = await fetchCityData(city);
@@ -165,6 +182,7 @@ async function renderCityData(city) {
   renderSunrise(cityData);
   renderSunset(cityData);
   // renderCityWindDirection(cityData);
+  renderCityWeatherIcon(cityData);
   return cityData;
 }
 
