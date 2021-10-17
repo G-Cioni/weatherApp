@@ -30,8 +30,8 @@ const feelsLikeElement = document.getElementById('feels-like');
 const celsiusBtnElement = document.getElementById('celsius');
 const fahrenheitBtnElement = document.getElementById('fahrenheit');
 const errorMessage = document.getElementById('error-message');
-// const high = document.getElementById('high');
-// const low = document.getElementById('low');
+const high = document.getElementById('high');
+const low = document.getElementById('low');
 // const windDirection = document.getElementById('wind-direction');
 
 // function renderCityWindDirection(cityData) {
@@ -46,10 +46,10 @@ function switchForecastTempPseudoElements(remove, add) {
   }
 }
 function switchTempPseudoElements(remove, add) {
-  // low.classList.remove(remove);
-  // low.classList.add(add);
-  // high.classList.remove(remove);
-  // high.classList.add(add);
+  low.classList.remove(remove);
+  low.classList.add(add);
+  high.classList.remove(remove);
+  high.classList.add(add);
   switchForecastTempPseudoElements(remove, add);
   feelsLikeElement.classList.remove(remove);
   feelsLikeElement.classList.add(add);
@@ -62,8 +62,8 @@ function switchSpeedPseudoElement(remove, add) {
 
 function convertAll(convertTemp, convertSpeed) {
   temperatureElement.textContent = convertTemp(temperatureElement.textContent);
-  // low.textContent = convertTemp(low.textContent);
-  // high.textContent = convertTemp(high.textContent);
+  low.textContent = convertTemp(low.textContent);
+  high.textContent = convertTemp(high.textContent);
   feelsLikeElement.textContent = convertTemp(feelsLikeElement.textContent);
   windSpeedElement.textContent = convertSpeed(windSpeedElement.textContent);
   const forecastTemps = [...document.querySelectorAll('.forecast-temp')];
@@ -172,8 +172,8 @@ async function renderCityData(city) {
   const cityData = await fetchCityData(city);
   renderCityName(cityData);
   renderCityTemp(cityData, 'temp', 'C', temperatureElement);
-  // renderCityTemp(cityData, 'temp_max', 'C', high);
-  // renderCityTemp(cityData, 'temp_min', 'C', low);
+  renderCityTemp(cityData, 'temp_max', 'C', high);
+  renderCityTemp(cityData, 'temp_min', 'C', low);
   renderCityTemp(cityData, 'feels_like', 'C', feelsLikeElement);
   renderCityHumidity(cityData);
   renderCityCountry(cityData);
