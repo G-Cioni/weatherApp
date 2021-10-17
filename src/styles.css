@@ -23,12 +23,14 @@ body {
   grid-area: container;
   display: grid;
   grid-template-areas:
-    'main-content . search'
+    '. . search'
     'main-content bubbles bubbles'
     'main-content forecast forecast'
-    'main-content forecast forecast';
+    '. forecast forecast';
   justify-content: space-between;
   gap: 4em;
+  height: 98vh;
+  width: 98vw;
 }
 
 #main-content {
@@ -41,6 +43,9 @@ body {
   border-radius: 1em;
   padding: 1em;
   text-align: center;
+  height: 34em;
+  width: 25em;
+  margin-left: 5em;
 }
 
 #main-info {
@@ -59,7 +64,7 @@ body {
 
 #main-icon {
   height: 15em;
-  margin: -3em;
+  margin: -3em -3em -2em -3em;
   padding: 0;
 }
 
@@ -80,7 +85,9 @@ body {
 }
 
 #temp-plus-switch {
-  padding-top: 1em;
+  padding: 1em;
+  position: relative;
+  left: 2em;
 }
 
 #main-temperature {
@@ -89,7 +96,8 @@ body {
 #unit-switch {
   display: inline-block;
   position: relative;
-  bottom: 5em;
+  bottom: 5.8em;
+  right: 0.6em;
 }
 #unit-switch-separator {
   display: inline-block;
@@ -144,6 +152,9 @@ body {
 #search {
   grid-area: search;
   height: 2em;
+  margin: 3em;
+  margin-right: 0em;
+  width: 26em;
 }
 
 #search-bar {
@@ -152,7 +163,6 @@ body {
   color: var(--light);
   background-color: rgba(255, 255, 255, 0.068);
   height: 1.8em;
-  width: 20 char;
   padding-left: 0.6em;
   padding-right: 1.6em;
   font-size: 1.5em;
@@ -161,7 +171,8 @@ body {
 #error-message {
   color: rgb(187, 0, 0);
   text-align: start;
-  padding: 0.4em;
+  overflow-wrap: normal;
+  padding: 0.5em 0.3em;
 }
 
 ::placeholder {
@@ -184,7 +195,7 @@ body {
 #secondary-info {
   grid-area: secondary;
   display: flex;
-  text-align: center;
+  justify-content: space-around;
   box-shadow: 1px 1px 5px black;
   border-radius: 1em;
   padding: 0.5em;
@@ -324,5 +335,5 @@ h4 {
 }
 
 h5 {
-  font-size: 1.4em;
+  font-size: 1.3em;
 }
