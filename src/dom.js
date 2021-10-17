@@ -165,6 +165,7 @@ function renderCityWeatherIcon(cityData) {
     weatherIcon.firstChild.setAttribute('id', 'main-icon');
   } else {
     weatherIcon.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
+    weatherIcon.firstChild.setAttribute('id', 'main-icon');
   }
 }
 
