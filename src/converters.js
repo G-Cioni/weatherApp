@@ -18,15 +18,20 @@ function convertToKph(mphSpeed) {
 }
 
 function convertNumToTime(num) {
-  const stringifiedNum = num.toString();
-  return stringifiedNum.length === 1
-    ? `0${stringifiedNum}:00`
-    : `${stringifiedNum}:00`;
+  const stringifiedNum = Math.round(num).toString();
+  let result;
+  if (stringifiedNum.length === 1) {
+    result = `0${stringifiedNum}:00`;
+  } else if (stringifiedNum.length === 2) {
+    result = `${stringifiedNum}:00`;
+  }
+  return result;
 }
 
 function addHours(time, addend) {
   const hour = parseInt(time.slice(0, 2), 10) + 24;
   let newTime = hour + addend;
+  newTime = newTime > 23 ? newTime - 24 : newTime;
   newTime = newTime > 23 ? newTime - 24 : newTime;
   return convertNumToTime(newTime);
 }
