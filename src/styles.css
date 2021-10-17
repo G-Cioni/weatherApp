@@ -186,7 +186,7 @@ body {
 }
 
 .secondary-info-text {
-  margin: 0.5em;
+  padding: 0.5em;
 }
 
 #bubbles {
@@ -207,6 +207,21 @@ body {
 
 .bubble-value {
   margin: 0.2em;
+}
+
+#temp-bubble {
+  position: relative;
+  top: 1.2em;
+}
+#sunrise-bubble {
+  position: relative;
+  bottom: 3em;
+  left: 0.5em;
+}
+#sunset-bubble {
+  position: relative;
+  top: 2em;
+  right: 1.5em;
 }
 
 .bubble-temp {
