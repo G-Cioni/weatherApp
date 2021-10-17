@@ -16,6 +16,7 @@ import {
 import { getCityTime, getSunrise, getSunset } from './time';
 import { weatherIcons, createWeatherIcon } from './icons';
 
+const weatherIcon = document.getElementById('main-icon-wrapper');
 const sunriseElement = document.getElementById('sunrise');
 const sunsetElement = document.getElementById('sunset');
 const timeElement = document.getElementById('time');
@@ -149,7 +150,6 @@ function renderSunset(cityData) {
 }
 
 function renderCityWeatherIcon(cityData) {
-  const weatherIcon = document.getElementById('main-weather-icon');
   const sunRise = document.getElementById('sunrise').innerHTML;
   const sunSet = document.getElementById('sunset').innerHTML;
   const condition = cityData.weather[0].main.toLowerCase();
@@ -162,6 +162,7 @@ function renderCityWeatherIcon(cityData) {
     weatherIcon.appendChild(
       createWeatherIcon(weatherIcons[`${condition}${nightTime}`]),
     );
+    weatherIcon.firstChild.setAttribute('id', 'main-icon');
   } else {
     weatherIcon.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
   }
