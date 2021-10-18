@@ -215,9 +215,9 @@ function removeAllChildren(parentNode) {
 function createForecastCard(forecastDataItem, forecastTime) {
   const forecastContainer = document.getElementById('forecast');
   const forecastCard = document.createElement('div');
-  const time = document.createElement('div');
+  const time = document.createElement('h5');
   const weatherCondition = document.createElement('div');
-  const avgTemp = document.createElement('div');
+  const avgTemp = document.createElement('h4');
   time.textContent = forecastTime;
   weatherCondition.textContent = forecastDataItem.weather;
   avgTemp.textContent = forecastDataItem.avgTemp;
@@ -254,8 +254,10 @@ function renderForecastWeatherIcons() {
       item.appendChild(
         createWeatherIcon(weatherIcons[`${condition}${nightTime}`]),
       );
+      item.firstChild.setAttribute('class', 'weather-icon');
     } else {
       item.appendChild(createWeatherIcon(weatherIcons[`${condition}`]));
+      item.firstChild.setAttribute('class', 'weather-icon');
     }
   });
 }
