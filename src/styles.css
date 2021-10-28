@@ -1,7 +1,9 @@
 :root {
   --h4-margin: 10px;
-  --dark: rgb(31, 31, 31);
-  --light: rgb(236, 236, 236);
+  --dark: hsl(0, 0%, 12%);
+  --background: #449dd1;
+  --secondary-background: hsla(214, 31%, 26%, 0.843);
+  --text: hsl(0, 0%, 93%);
 }
 
 @font-face {
@@ -11,8 +13,14 @@
 
 body {
   font-family: roboto;
-  background-color: var(--dark);
-  color: var(--light);
+  background-color: var(--background);
+  color: var(--text);
+}
+
+#container {
+  max-width: 120em;
+  margin: auto;
+  width: 90%;
 }
 
 #all-except-search {
@@ -21,7 +29,8 @@ body {
   grid-template-areas:
     'main-content bubbles'
     'main-content forecast';
-  gap: 5em 7em;
+  gap: 7em 10em;
+  max-width: 50em;
 }
 
 #search {
@@ -34,8 +43,8 @@ body {
 #search-bar {
   border: 0px solid black;
   border-radius: 0.5em;
-  color: var(--light);
-  background-color: rgba(255, 255, 255, 0.068);
+  color: var(--text);
+  background-color: hsla(214, 31%, 26%, 0.596);
   height: 1.8em;
   padding-left: 0.6em;
   padding-right: 1.6em;
@@ -43,6 +52,7 @@ body {
 }
 
 #main-content {
+  background-color: var(--secondary-background);
   grid-area: main-content;
   display: grid;
   grid-template-areas:
@@ -68,7 +78,9 @@ body {
 }
 
 #city-and-country {
-  margin-bottom: 0.5em;
+  width: 25em;
+  height: 4em;
+  overflow: hidden;
 }
 
 #main-icon {
@@ -97,6 +109,7 @@ body {
   padding: 1em;
   position: relative;
   left: 2em;
+  top: 1em;
 }
 
 #main-temperature {
@@ -114,7 +127,7 @@ body {
 
 .scale-btn {
   background-color: rgba(255, 255, 255, 0);
-  color: var(--light);
+  color: var(--text);
   border: 0px;
   border-radius: 50%;
   font-size: 1.5em;
@@ -166,7 +179,7 @@ body {
 }
 
 ::placeholder {
-  color: rgba(255, 255, 255, 0.521);
+  color: hsla(0, 0%, 93%, 0.843);
   font-family: roboto;
 }
 
@@ -175,7 +188,7 @@ body {
 }
 #search-btn {
   background-color: rgba(255, 255, 255, 0);
-  color: var(--light);
+  color: var(--text);
   border: 0px;
   position: relative;
   right: 2.2em;
@@ -186,13 +199,11 @@ body {
   grid-area: secondary;
   display: flex;
   justify-content: space-around;
-  box-shadow: 1px 1px 5px black;
+  align-items: center;
   border-radius: 1em;
-  padding: 0.5em;
 }
-
 .secondary-info-text {
-  padding: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 @keyframes wiggle {
@@ -226,11 +237,14 @@ body {
 }
 
 .bubble {
-  display: flex;
+  background-color: var(--secondary-background);
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 10em;
   height: 9em;
-  line-height: 2em;
+  line-height: 5em;
   border-radius: 50%;
   box-shadow: 1px 1px 5px black;
   text-align: center;
@@ -243,6 +257,36 @@ body {
   top: 3em;
 }
 
+#high-low {
+  display: flex;
+  justify-content: space-around;
+}
+
+.bubble-img {
+  background-repeat: no-repeat;
+  width: 5em;
+  height: 5em;
+}
+
+#temp-bubble-content {
+  position: relative;
+  top: 0.5em;
+}
+
+#temp-img {
+  background-image: url(/src/img/temperature.svg);
+  width: 4em;
+  height: 4em;
+}
+
+#sunrise-img {
+  background-image: url(/src/img/sunrise.svg);
+}
+
+#sunset-img {
+  background-image: url(/src/img/sunset.svg);
+}
+
 #temp-bubble {
   position: relative;
   top: 1.2em;
@@ -250,25 +294,11 @@ body {
   animation-delay: 1s;
 }
 
-#temp-img {
-  background-image: url(/src/img/temperature.svg);
-  background-repeat: no-repeat;
-  width: 5em;
-  height: 5em;
-}
-
 #sunrise-bubble {
   position: relative;
   bottom: 3em;
   left: 0.5em;
   animation: wiggle 14s infinite;
-}
-
-#sunrise-img {
-  background-image: url(/src/img/sunrise.svg);
-  background-repeat: no-repeat;
-  width: 5em;
-  height: 5em;
 }
 
 #sunset-bubble {
@@ -279,21 +309,8 @@ body {
   animation-delay: 2s;
 }
 
-#sunset-img {
-  background: red;
-  background-image: url(/src/img/sunset.svg);
-  background-repeat: no-repeat;
-  width: 5em;
-  height: 5em;
-}
-
 .bubble-temp {
   margin: 0em 0.2em;
-}
-
-#high-low {
-  display: flex;
-  justify-content: space-between;
 }
 
 #forecast {
@@ -310,6 +327,7 @@ body {
 }
 
 .forecast-card {
+  background-color: var(--secondary-background);
   display: flex;
   flex-direction: column;
   justify-content: center;
