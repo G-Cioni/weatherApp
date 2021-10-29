@@ -12,7 +12,7 @@ import {
   convertToKph,
   msToKph,
   addHours,
-} from './converters';
+} from './tools';
 import { getCityTime, getSunrise, getSunset } from './time';
 import { weatherIcons, createWeatherIcon } from './icons';
 
@@ -119,7 +119,9 @@ function renderCityWeatherDesc(cityData) {
 }
 
 function renderCityName(cityData) {
-  nameElement.textContent = cityData.name;
+  const cityName = cityData.name;
+
+  nameElement.textContent = cityName;
 }
 
 function renderCityCountry(cityData) {
