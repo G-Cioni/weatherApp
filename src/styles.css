@@ -58,7 +58,7 @@ body {
   grid-template-areas:
     'main-info'
     'secondary';
-  box-shadow: 1px 1px 5px black;
+  box-shadow: 0.5px 0.5px 2px black;
   border-radius: 1em;
   padding: 1em;
   text-align: center;
@@ -79,7 +79,7 @@ body {
 
 #city-and-country {
   width: 25em;
-  height: 4em;
+  height: 4.2em;
   overflow: hidden;
 }
 
@@ -246,7 +246,7 @@ body {
   height: 9em;
   line-height: 5em;
   border-radius: 50%;
-  box-shadow: 1px 1px 5px black;
+  box-shadow: 0.5px 0.5px 2px black;
   text-align: center;
   padding-top: 0.8em;
   margin: auto;
@@ -332,7 +332,7 @@ body {
   flex-direction: column;
   justify-content: center;
   margin: 0.5em;
-  box-shadow: 1px 1px 5px black;
+  box-shadow: 0.5px 0.5px 2px black;
   border-radius: 1em;
   padding: 0.5em;
   height: 7.5em;
