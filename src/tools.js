@@ -36,6 +36,18 @@ function addHours(time, addend) {
   return convertNumToTime(newTime);
 }
 
+function deleteText(string, toDelete) {
+  return string.includes(toDelete) ? string.replace(toDelete, '') : string;
+}
+
+function deleteTextLoop(string, toDeleteArray) {
+  let result = string;
+  toDeleteArray.forEach((element) => {
+    result = deleteText(result, element);
+  });
+  return result;
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   convertToFahrenheit,
@@ -44,4 +56,5 @@ export {
   convertToMph,
   msToKph,
   addHours,
+  deleteTextLoop,
 };

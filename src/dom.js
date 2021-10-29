@@ -12,6 +12,7 @@ import {
   convertToKph,
   msToKph,
   addHours,
+  deleteTextLoop,
 } from './tools';
 import { getCityTime, getSunrise, getSunset } from './time';
 import { weatherIcons, createWeatherIcon } from './icons';
@@ -121,7 +122,10 @@ function renderCityWeatherDesc(cityData) {
 function renderCityName(cityData) {
   const cityName = cityData.name;
 
-  nameElement.textContent = cityName;
+  nameElement.textContent = deleteTextLoop(cityName, [
+    'Provincia di',
+    'Province of',
+  ]);
 }
 
 function renderCityCountry(cityData) {
