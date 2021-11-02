@@ -6,6 +6,7 @@ import rain from './img/rainy-7.svg';
 import snow from './img/snowy-6.svg';
 import thunder from './img/thunder.svg';
 import mist from './img/cloudy.svg';
+import fog from './img/cloudy.svg';
 
 const weatherIcons = {
   clear,
@@ -16,6 +17,7 @@ const weatherIcons = {
   snow,
   thunder,
   mist,
+  fog,
 };
 
 function createWeatherIcon(weatherCondition) {
