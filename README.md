@@ -2,7 +2,7 @@
 
 App for weather predictions. Focus of the project was to learn Asynchronous Javascript
 
-**Live preview: [Weather App](https://gianlucacioni.github.io/weatherApp/)**
+### [Live Preview Weather App](https://gianlucacioni.github.io/weatherApp/)
 
 From The Odin Project's [curriculum](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/weather-app)
 
